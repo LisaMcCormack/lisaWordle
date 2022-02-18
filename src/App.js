@@ -38,12 +38,16 @@ function App() {
         return green && guesses[i] !== undefined && guesses[i] === word[i]
     }
 
+    const evaluateGrayCss = (i) => {
+        return green && word.includes(guesses[i])
+    }
+
     return (
         <div className="App">
             <h1>Wordle</h1>
             <div className='guesses'>
                 {Array.from(Array(30), (e, i) =>
-                    <div className={`box ${evaluateGreenCss(i) && "green"}`} key={i}>{guesses[i]}</div>
+                    <div className={`box ${evaluateGreenCss(i) && "green"} ${evaluateGrayCss(i) && 'gray'}`} key={i}>{guesses[i]}</div>
                 )}
             </div>
             <div className="keyboard">

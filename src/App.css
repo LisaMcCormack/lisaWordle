@@ -23,7 +23,12 @@ h1 {
 }
 
 .green {
-  background: rgb(106, 170, 100);
+  background: rgb(106, 170, 100) !important;
+  color: white
+}
+
+.gray {
+  background: rgb(120, 124, 126);
   color: white
 }
 
