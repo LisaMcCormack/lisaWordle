@@ -14,7 +14,9 @@ function App() {
         console.log('>>>', button)
         if (button === "{bksp}") {
             setGuesses(guesses.substring(0, guesses.length - 1))
-        } else {
+        } else if (guesses.length === 5) {
+            return
+        } else if (button !== "{enter}") {
             setGuesses(guesses + button);
         }
         console.log('>>>', guesses);
