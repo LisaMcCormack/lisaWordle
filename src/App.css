@@ -10,13 +10,16 @@ h1 {
 
 .keyboard {
   width: 700px;
-  margin-top: 20px;
+  margin-top: 70px;
 }
 
 .box {
   width: 55px;
   height: 55px;
   border: lightgray 1px solid;
+  font-size: 45px;
+  text-align: center;
+  font-weight: 600;
 }
 
 .guesses {

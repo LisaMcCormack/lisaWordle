@@ -12,7 +12,7 @@ function App() {
 
     const onKeyPress = (button) => {
         console.log('>>>', button)
-        if (button === '{bksp}') {
+        if (button === "{bksp}") {
             setGuesses(guesses.substring(0, guesses.length - 1))
         } else {
             setGuesses(guesses + button);
@@ -32,6 +32,14 @@ function App() {
                 <Keyboard
                     onChange={onChange}
                     onKeyPress={onKeyPress}
+                    layoutName="shift"
+                    layout={{
+                        shift: [
+                            "Q W E R T Y U I O P {bksp}",
+                            'A S D F G H J K L {enter}',
+                            "Z X C V B N M",
+                        ]
+                    }}
                 />
             </div>
         </div>
