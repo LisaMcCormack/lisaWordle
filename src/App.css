@@ -21,7 +21,9 @@ h1 {
 
 .guesses {
   display: grid;
-  grid: repeat(6, 70px) / auto-flow 65px;
+  grid-auto-flow: row;
+  gap: 10px;
+  grid-template: repeat(4, 1fr) / repeat(5, 1fr);
   margin: 0 auto;
   width: 50%;
 }
