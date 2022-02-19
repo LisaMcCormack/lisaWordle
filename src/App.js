@@ -1,58 +1,56 @@
-import React, {useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
 import './App.css';
 import {fiveLetterWords} from "./fiveLetterWords";
 
 function App() {
-    const [guesses, setGuesses] = useState("")
-    const [green, setGreen] = useState(false)
-
+    const [guesses, setGuesses] = useState('')
     const [word] = useState(fiveLetterWords[Math.floor( Math.random() * fiveLetterWords.length)].toUpperCase())
+    const [oldAttempts, setOldAttempts] = useState('')
     console.log('>>>', word)
 
-    const onChange = (input) => {
-        console.log("Input changed", input);
-    }
-
     const onKeyPress = (button) => {
-        console.log('>>>', button)
-        console.log('>>>guesses', guesses)
-        console.log('>>>word', word)
-
-        if (guesses.length === 5 && button === "{enter}") {
-            console.log('>>>YO')
-            setGreen(true)
-        }
         if (button === "{bksp}") {
             setGuesses(guesses.substring(0, guesses.length - 1))
-        } else if (guesses.length === 5) {
-            return
+        } else if (button === "{enter}" && guesses.length === 5) {
+            setOldAttempts(oldAttempts + guesses);
+            setGuesses('')
         } else if (button !== "{enter}") {
-            setGuesses(guesses + button);
+            setGuesses(guesses + button)
         }
-        console.log('>>>', guesses);
     }
 
     const evaluateGreenCss = (i) => {
-        return green && guesses[i] !== undefined && guesses[i] === word[i]
+        const repeatWord = word.repeat(6)
+        if (oldAttempts[i] === repeatWord[i]) {
+            return true
+        }
     }
 
     const evaluateGrayCss = (i) => {
-        return green && word.includes(guesses[i])
+        if (word.includes(oldAttempts[i])) {
+            return true
+        }
     }
 
     return (
         <div className="App">
             <h1>Wordle</h1>
             <div className='guesses'>
-                {Array.from(Array(30), (e, i) =>
-                    <div className={`box ${evaluateGreenCss(i) && "green"} ${evaluateGrayCss(i) && 'gray'}`} key={i}>{guesses[i]}</div>
+                {Array.from(Array(oldAttempts.length), (e, i) =>
+                    <div className={`box ${evaluateGreenCss(i) && "green"} ${evaluateGrayCss(i) && 'gray'}`} key={i}>{oldAttempts[i]}</div>
+                )}
+                {Array.from(Array(5), (e, i) =>
+                    <div className={'box'} key={i}>{guesses[i]}</div>
+                )}
+                {Array.from(Array(30 - oldAttempts.length - 5), (e, i) =>
+                    <div className="box" key={i}/>
                 )}
             </div>
             <div className="keyboard">
                 <Keyboard
-                    onChange={onChange}
+                    // onChange={onChange}
                     onKeyPress={onKeyPress}
                     layoutName="shift"
                     layout={{
