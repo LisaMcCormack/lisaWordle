@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
 import './App.css';
@@ -6,9 +6,16 @@ import {fiveLetterWords} from "./fiveLetterWords";
 
 function App() {
     const [guesses, setGuesses] = useState('')
-    const [word] = useState(fiveLetterWords[Math.floor( Math.random() * fiveLetterWords.length)].toUpperCase())
+    const [word] = useState(fiveLetterWords[Math.floor(Math.random() * fiveLetterWords.length)].toUpperCase())
     const [oldAttempts, setOldAttempts] = useState('')
-    console.log('>>>', word)
+
+    useEffect(() => {
+        if (oldAttempts.substr(oldAttempts.length - 5) === word) {
+            setTimeout(() => {
+                alert('you won')
+            }, 20)
+        }
+    }, [oldAttempts])
 
     const onKeyPress = (button) => {
         if (oldAttempts.substr(oldAttempts.length - 5) === word) {
@@ -31,6 +38,7 @@ function App() {
         }
     }
 
+
     const evaluateGrayCss = (i) => {
         if (word.includes(oldAttempts[i])) {
             return true
@@ -42,7 +50,8 @@ function App() {
             <h1>Wordle</h1>
             <div className='guesses'>
                 {Array.from(Array(oldAttempts.length), (e, i) =>
-                    <div className={`box ${evaluateGreenCss(i) && "green"} ${evaluateGrayCss(i) && 'gray'} A`} key={i}>{oldAttempts[i]}</div>
+                    <div className={`box ${evaluateGreenCss(i) && "green"} ${evaluateGrayCss(i) && 'gray'} A`}
+                         key={i}>{oldAttempts[i]}</div>
                 )}
                 {Array.from(Array(oldAttempts.length === 30 ? 0 : 5), (e, i) =>
                     <div className={'box B'} key={i}>{guesses[i]}</div>
