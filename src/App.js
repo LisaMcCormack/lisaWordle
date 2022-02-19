@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
 import './App.css';
@@ -11,6 +11,9 @@ function App() {
     console.log('>>>', word)
 
     const onKeyPress = (button) => {
+        if (oldAttempts.substr(oldAttempts.length - 5) === word) {
+            return
+        }
         if (button === "{bksp}") {
             setGuesses(guesses.substring(0, guesses.length - 1))
         } else if (button === "{enter}" && guesses.length === 5) {
@@ -39,18 +42,17 @@ function App() {
             <h1>Wordle</h1>
             <div className='guesses'>
                 {Array.from(Array(oldAttempts.length), (e, i) =>
-                    <div className={`box ${evaluateGreenCss(i) && "green"} ${evaluateGrayCss(i) && 'gray'}`} key={i}>{oldAttempts[i]}</div>
+                    <div className={`box ${evaluateGreenCss(i) && "green"} ${evaluateGrayCss(i) && 'gray'} A`} key={i}>{oldAttempts[i]}</div>
                 )}
-                {Array.from(Array(5), (e, i) =>
-                    <div className={'box'} key={i}>{guesses[i]}</div>
+                {Array.from(Array(oldAttempts.length === 30 ? 0 : 5), (e, i) =>
+                    <div className={'box B'} key={i}>{guesses[i]}</div>
                 )}
-                {Array.from(Array(30 - oldAttempts.length - 5), (e, i) =>
-                    <div className="box" key={i}/>
+                {Array.from(Array(Math.max(30 - oldAttempts.length - 5, 0)), (e, i) =>
+                    <div className="box C" key={i}/>
                 )}
             </div>
             <div className="keyboard">
                 <Keyboard
-                    // onChange={onChange}
                     onKeyPress={onKeyPress}
                     layoutName="shift"
                     layout={{
