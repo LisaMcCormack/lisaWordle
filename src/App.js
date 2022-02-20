@@ -8,7 +8,6 @@ function App() {
     const [guesses, setGuesses] = useState('')
     const [word] = useState(fiveLetterWords[Math.floor(Math.random() * fiveLetterWords.length)].toUpperCase())
     const [oldAttempts, setOldAttempts] = useState('')
-    console.log('>>>', word)
 
     useEffect(() => {
         if (oldAttempts.substr(oldAttempts.length - 5) === word) {
