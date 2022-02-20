@@ -8,6 +8,7 @@ function App() {
     const [guesses, setGuesses] = useState('')
     const [word] = useState(fiveLetterWords[Math.floor(Math.random() * fiveLetterWords.length)].toUpperCase())
     const [oldAttempts, setOldAttempts] = useState('')
+    console.log('>>>', word)
 
     useEffect(() => {
         if (oldAttempts.substr(oldAttempts.length - 5) === word) {
@@ -55,6 +56,20 @@ function App() {
         return string
     }
 
+    const evaluateGreenKeyBoardKey = () => {
+        let string = ' '
+        const attempts = oldAttempts.match(/.{1,5}/g) ?? []
+        attempts.forEach(w => {
+            for (let i = 0; i < 5; i++) {
+               if (w[i] === word[i] && !string.includes(w[i])) {
+                   string = string + `${w[i]} `
+               }
+            }
+        })
+
+        return string
+    }
+
     return (
         <div className="App">
             <h1>Wordle</h1>
@@ -82,6 +97,10 @@ function App() {
                         ]
                     }}
                     buttonTheme={[
+                        {
+                            class: "hg-green",
+                            buttons: evaluateGreenKeyBoardKey()
+                        },
                         {
                             class: "hg-gray",
                             buttons: evaluateGrayKeyBoardKey()
