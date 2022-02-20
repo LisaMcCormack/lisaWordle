@@ -15,7 +15,7 @@ function App() {
                 alert('you won')
             }, 20)
         }
-    }, [oldAttempts])
+    }, [oldAttempts, word])
 
     const onKeyPress = (button) => {
         if (oldAttempts.substr(oldAttempts.length - 5) === word) {
@@ -45,6 +45,16 @@ function App() {
         }
     }
 
+    const evaluateGrayKeyBoardKey = () => {
+        let string = ' '
+        oldAttempts.split('').forEach((l) => {
+            if (word.includes(l)) {
+                string = string + `${l} `
+            }
+        })
+        return string
+    }
+
     return (
         <div className="App">
             <h1>Wordle</h1>
@@ -71,6 +81,13 @@ function App() {
                             "Z X C V B N M",
                         ]
                     }}
+                    buttonTheme={[
+                        {
+                            class: "hg-gray",
+                            buttons: evaluateGrayKeyBoardKey()
+                        }
+                    ]}
+
                 />
             </div>
         </div>

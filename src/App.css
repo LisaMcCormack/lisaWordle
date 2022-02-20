@@ -40,3 +40,11 @@ h1 {
   margin: 0 auto;
   width: 50%;
 }
+
+.hg-gray {
+  background: rgb(120, 124, 126) !important;
+}
+
+.hg-green {
+  background: rgb(106, 170, 100) !important;
+}
