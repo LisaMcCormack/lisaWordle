@@ -14,6 +14,10 @@ function App() {
             setTimeout(() => {
                 alert('you won')
             }, 20)
+        }  else if (oldAttempts.length === 30) {
+            setTimeout(() => {
+                alert(`the word was ${word}`)
+            }, 20)
         }
     }, [oldAttempts, word])
 
