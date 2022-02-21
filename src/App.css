@@ -27,8 +27,8 @@ h1 {
   color: white
 }
 
-.gray {
-  background: rgb(120, 124, 126);
+.yellow {
+  background: rgb(201, 180, 88);
   color: white
 }
 
@@ -45,6 +45,11 @@ h1 {
   background: rgb(120, 124, 126) !important;
 }
 
+.hg-yellow {
+  background: rgb(201, 180, 88) !important;
+}
+
 .hg-green {
   background: rgb(106, 170, 100) !important;
 }
+

@@ -39,13 +39,13 @@ function App() {
     }
 
 
-    const evaluateGrayCss = (i) => {
+    const evaluateYellowCss = (i) => {
         if (word.includes(oldAttempts[i])) {
             return true
         }
     }
 
-    const evaluateGrayKeyBoardKey = () => {
+    const evaluateYellowKeyBoardKey = () => {
         let string = ' '
         oldAttempts.split('').forEach((l) => {
             if (word.includes(l)) {
@@ -69,12 +69,26 @@ function App() {
         return string
     }
 
+    const evaluateGrayKeyBoardKey = () => {
+        let string = ' '
+        const attempts = oldAttempts.match(/.{1,5}/g) ?? []
+        attempts.forEach(w => {
+            for (let i = 0; i < 5; i++) {
+                if (w[i] !== word[i] && !string.includes(w[i])) {
+                    string = string + `${w[i]} `
+                }
+            }
+        })
+
+        return string
+    }
+
     return (
         <div className="App">
             <h1>Wordle</h1>
             <div className='guesses'>
                 {Array.from(Array(oldAttempts.length), (e, i) =>
-                    <div className={`box ${evaluateGreenCss(i) && "green"} ${evaluateGrayCss(i) && 'gray'} A`}
+                    <div className={`box ${evaluateGreenCss(i) && "green"} ${evaluateYellowCss(i) && 'yellow'} A`}
                          key={i}>{oldAttempts[i]}</div>
                 )}
                 {Array.from(Array(oldAttempts.length === 30 ? 0 : 5), (e, i) =>
@@ -99,6 +113,10 @@ function App() {
                         {
                             class: "hg-green",
                             buttons: evaluateGreenKeyBoardKey()
+                        },
+                        {
+                            class: "hg-yellow",
+                            buttons: evaluateYellowKeyBoardKey()
                         },
                         {
                             class: "hg-gray",
