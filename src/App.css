@@ -32,6 +32,11 @@ h1 {
   color: white
 }
 
+.gray {
+  background: rgb(120, 124, 126);
+  color: white
+}
+
 .guesses {
   display: grid;
   grid-auto-flow: row;

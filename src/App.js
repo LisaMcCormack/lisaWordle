@@ -45,6 +45,12 @@ function App() {
         }
     }
 
+    const evaluateGrayCss = (i) => {
+        if (!word.includes(oldAttempts[i])) {
+            return true
+        }
+    }
+
     const evaluateYellowKeyBoardKey = () => {
         let string = ' '
         oldAttempts.split('').forEach((l) => {
@@ -88,7 +94,7 @@ function App() {
             <h1>Wordle</h1>
             <div className='guesses'>
                 {Array.from(Array(oldAttempts.length), (e, i) =>
-                    <div className={`box ${evaluateGreenCss(i) && "green"} ${evaluateYellowCss(i) && 'yellow'} A`}
+                    <div className={`box ${evaluateGreenCss(i) && "green"} ${evaluateYellowCss(i) && 'yellow'} ${evaluateGrayCss(i) && 'gray'} A`}
                          key={i}>{oldAttempts[i]}</div>
                 )}
                 {Array.from(Array(oldAttempts.length === 30 ? 0 : 5), (e, i) =>
