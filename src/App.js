@@ -81,15 +81,11 @@ function App() {
 
     const evaluateGrayKeyBoardKey = () => {
         let string = ' '
-        const attempts = oldAttempts.match(/.{1,5}/g) ?? []
-        attempts.forEach(w => {
-            for (let i = 0; i < 5; i++) {
-                if (w[i] !== word[i] && !string.includes(w[i])) {
-                    string = string + `${w[i]} `
-                }
+        oldAttempts.split('').forEach((l) => {
+            if (!word.includes(l)) {
+                string = string + `${l} `
             }
         })
-
         return string
     }
 
