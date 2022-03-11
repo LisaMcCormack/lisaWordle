@@ -8,6 +8,7 @@ function App() {
     const [guesses, setGuesses] = useState('')
     const [word] = useState(fiveLetterWords[Math.floor(Math.random() * fiveLetterWords.length)].toUpperCase())
     const [oldAttempts, setOldAttempts] = useState('')
+    console.log('>>>', word)
 
     useEffect(() => {
         if (oldAttempts.substr(oldAttempts.length - 5) === word) {
@@ -50,7 +51,7 @@ function App() {
     }
 
     const evaluateGrayCss = (i) => {
-        if (!word.includes(oldAttempts[i])) {
+        if (!word.includes(oldAttempts[i]) || (oldAttempts.substr(oldAttempts.length - 5).slice(0, i).includes(oldAttempts[i]) && oldAttempts.substr(oldAttempts.length - 5).split(oldAttempts[i]).length - 1 > word.split(oldAttempts[i]).length - 1)) {
             return true
         }
     }
