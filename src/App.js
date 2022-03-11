@@ -8,7 +8,6 @@ function App() {
     const [guesses, setGuesses] = useState('')
     const [word] = useState(fiveLetterWords[Math.floor(Math.random() * fiveLetterWords.length)].toUpperCase())
     const [oldAttempts, setOldAttempts] = useState('')
-    console.log('>>>', word)
 
     useEffect(() => {
         if (oldAttempts.substr(oldAttempts.length - 5) === word) {
@@ -53,7 +52,7 @@ function App() {
     const evaluateGrayCss = (i) => {
         const attempts = oldAttempts.match(/.{1,5}/g) ?? []
         const index = Math.floor(i/5)
-        if (!word.includes(oldAttempts[i]) || (attempts[index].slice(0,i).includes(oldAttempts[i]) && attempts[index].split(oldAttempts[i]).length - 1 > word.split(oldAttempts[i]).length - 1 )) {
+        if (!word.includes(oldAttempts[i]) || (oldAttempts.slice(index*5,i).includes(oldAttempts[i]) && attempts[index].split(oldAttempts[i]).length - 1 > word.split(oldAttempts[i]).length - 1 )) {
             return true
         }
     }
@@ -97,7 +96,7 @@ function App() {
             <h1>Wordle</h1>
             <div className='guesses'>
                 {Array.from(Array(oldAttempts.length), (e, i) =>
-                    <div className={`box ${evaluateGreenCss(i) && "green"} ${evaluateYellowCss(i) && 'yellow'} ${evaluateGrayCss(i) && 'gray'} A`}
+                    <div className={`box ${evaluateGrayCss(i) && 'gray'} ${evaluateGreenCss(i) && "green"} ${evaluateYellowCss(i) && 'yellow'}  A`}
                          key={i}>{oldAttempts[i]}</div>
                 )}
                 {Array.from(Array(oldAttempts.length === 30 ? 0 : 5), (e, i) =>
