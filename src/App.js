@@ -51,7 +51,9 @@ function App() {
     }
 
     const evaluateGrayCss = (i) => {
-        if (!word.includes(oldAttempts[i]) || (oldAttempts.substr(oldAttempts.length - 5).slice(0, i).includes(oldAttempts[i]) && oldAttempts.substr(oldAttempts.length - 5).split(oldAttempts[i]).length - 1 > word.split(oldAttempts[i]).length - 1)) {
+        const attempts = oldAttempts.match(/.{1,5}/g) ?? []
+        const index = Math.floor(i/5)
+        if (!word.includes(oldAttempts[i]) || (attempts[index].slice(0,i).includes(oldAttempts[i]) && attempts[index].split(oldAttempts[i]).length - 1 > word.split(oldAttempts[i]).length - 1 )) {
             return true
         }
     }
