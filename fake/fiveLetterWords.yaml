@@ -1,0 +1,11 @@
+---
+- name: Five letter words API
+  request:
+    uri: /
+    method: GET
+  response:
+    code: 200
+    body: '["about", "piano", "house", "alone", "above", "media", "radio", "voice", "value", "alive"]'
+    headers:
+      content-type: application/json
+      Access-Control-Allow-Origin: http://localhost:3000

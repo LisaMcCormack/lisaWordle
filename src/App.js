@@ -2,15 +2,23 @@ import React, {useEffect, useState} from 'react';
 import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
 import './App.css';
-import {fiveLetterWords} from "./fiveLetterWords";
+import axios from "axios";
 
 function App() {
     const [guesses, setGuesses] = useState('')
-    const [word] = useState(fiveLetterWords[Math.floor(Math.random() * fiveLetterWords.length)].toUpperCase())
+    const [word, setWord] = useState("")
     const [oldAttempts, setOldAttempts] = useState('')
 
     useEffect(() => {
-        if (oldAttempts.substr(oldAttempts.length - 5) === word) {
+        axios('http://localhost:8080/').then(res => {
+            setWord(res.data[Math.floor(Math.random() * res.data.length)].toUpperCase());
+        })
+    }, [])
+
+    console.log('>>>',word)
+
+    useEffect(() => {
+        if (oldAttempts.length && oldAttempts.substr(oldAttempts.length - 5) === word) {
             setTimeout(() => {
                 alert('you won')
             }, 20)
@@ -97,7 +105,7 @@ function App() {
             <div className='guesses'>
                 {Array.from(Array(oldAttempts.length), (e, i) =>
                     <div className={`box ${evaluateGrayCss(i) && 'gray'} ${evaluateGreenCss(i) && "green"} ${evaluateYellowCss(i) && 'yellow'}  A`}
-                         key={i}>{oldAttempts[i]}</div>
+                         key={i} data-guessed={`${oldAttempts[i]}-${i}`}>{oldAttempts[i]}</div>
                 )}
                 {Array.from(Array(oldAttempts.length === 30 ? 0 : 5), (e, i) =>
                     <div className={'box B'} key={i}>{guesses[i]}</div>

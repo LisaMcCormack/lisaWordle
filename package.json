@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.3",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.26.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "5.0.0",
@@ -13,10 +14,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "npm run stopFake || npm run fake && react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "testcafe chrome tests/wordle.ts --hostname localhost",
+    "eject": "react-scripts eject",
+    "fake": "docker run --rm=true -d -p 8080:8080 -v ${PWD}/fake/fiveLetterWords.yaml:/fiveLetterWords.yaml quii/mockingjay-server:1.11.1 -config=/fiveLetterWords.yaml -port=8080",
+    "stopFake": "docker stop $(docker ps -q)"
   },
   "eslintConfig": {
     "extends": [
@@ -35,5 +38,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "testcafe": "^1.18.4"
   }
 }

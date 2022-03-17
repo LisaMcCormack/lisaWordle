@@ -1,1 +1,0 @@
-export const fiveLetterWords = ['about', 'piano', 'house', 'alone', 'above', 'media', 'radio', 'voice', 'value', 'alive']
