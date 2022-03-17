@@ -11,11 +11,11 @@ function App() {
 
     useEffect(() => {
         axios('http://localhost:8080/').then(res => {
-            setWord(res.data[Math.floor(Math.random() * res.data.length)].toUpperCase());
+            console.log('>>>', res)
+            // setWord(res.data[Math.floor(Math.random() * res.data.length)].toUpperCase());
+            setWord(["alone"][Math.floor(Math.random() * res.data.length)].toUpperCase());
         })
     }, [])
-
-    console.log('>>>',word)
 
     useEffect(() => {
         if (oldAttempts.length && oldAttempts.substr(oldAttempts.length - 5) === word) {
