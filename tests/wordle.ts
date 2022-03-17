@@ -41,7 +41,7 @@ test('it shows a square as yellow if word contains the letter but it is not in t
         .expect(Selector('[data-guessed="A-1"]').getStyleProperty('background-color')).eql(yellow)
 })
 
-test.only('if guesses word has two Es but word only has one E in the right place only the right one E is green and the other gray', async t => {
+test('if guesses word has two Es but word only has one E in the right place only the right one E is green and the other gray', async t => {
     await t
         .click(Selector('[data-skbtn="H"]'))
         .click(Selector('[data-skbtn="E"]'))
