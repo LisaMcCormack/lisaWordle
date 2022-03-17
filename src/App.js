@@ -60,10 +60,7 @@ function App() {
     const evaluateGrayCss = (i) => {
         const attempts = oldAttempts.match(/.{1,5}/g) ?? []
         const index = Math.floor(i/5)
-        console.log('>>>oldAttempts[i]', oldAttempts[i])
-        console.log('>>>slice', oldAttempts.slice(index*5,i).includes(oldAttempts[i]))
-        console.log('>>>greater',  attempts[index].split(oldAttempts[i]).length - 1 > word.split(oldAttempts[i]).length - 1)
-        if (!word.includes(oldAttempts[i]) || (oldAttempts.slice(index*5,i).includes(oldAttempts[i]) && attempts[index].split(oldAttempts[i]).length - 1 > word.split(oldAttempts[i]).length - 1 ) || (oldAttempts.slice(i, (index*5)+5).includes(oldAttempts[i]) && attempts[index].split(oldAttempts[i]).length - 1 > word.split(oldAttempts[i]).length - 1 )) {
+        if (!word.includes(oldAttempts[i]) || (oldAttempts.slice(i+1, (index+1)*5).includes(oldAttempts[i]) && attempts[index].split(oldAttempts[i]).length - 1 > word.split(oldAttempts[i]).length - 1 )) {
             return true
         }
     }

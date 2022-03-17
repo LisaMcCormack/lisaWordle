@@ -52,3 +52,15 @@ test('if guesses word has two Es but word only has one E in the right place only
         .expect(Selector('[data-guessed="E-1"]').getStyleProperty('background-color')).eql(gray)
         .expect(Selector('[data-guessed="E-4"]').getStyleProperty('background-color')).eql(green)
 })
+
+test('if guesses word has two Es but word only has one E in the right place only the right one E is green and the other gray 2', async t => {
+    await t
+        .click(Selector('[data-skbtn="E"]'))
+        .click(Selector('[data-skbtn="A"]'))
+        .click(Selector('[data-skbtn="G"]'))
+        .click(Selector('[data-skbtn="E"]'))
+        .click(Selector('[data-skbtn="R"]'))
+        .click(Selector('[data-skbtnuid="shift-r1b9"]'))
+        .expect(Selector('[data-guessed="E-0"]').getStyleProperty('background-color')).eql(gray)
+        .expect(Selector('[data-guessed="E-3"]').getStyleProperty('background-color')).eql(yellow)
+})
