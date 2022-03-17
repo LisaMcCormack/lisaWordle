@@ -11,9 +11,9 @@ function App() {
 
     useEffect(() => {
         axios('http://localhost:8080/').then(res => {
-            console.log('>>>', res)
-            // setWord(res.data[Math.floor(Math.random() * res.data.length)].toUpperCase());
-            setWord(["alone"][Math.floor(Math.random() * ["alone"].length)].toUpperCase());
+            // console.log('>>>', res)
+            // setWord(["alone"][Math.floor(Math.random() * ["alone"].length)].toUpperCase());
+            setWord(res.data[Math.floor(Math.random() * res.data.length)].toUpperCase());
         })
     }, [])
 
