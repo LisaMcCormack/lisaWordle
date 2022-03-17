@@ -13,7 +13,7 @@ function App() {
         axios('http://localhost:8080/').then(res => {
             console.log('>>>', res)
             // setWord(res.data[Math.floor(Math.random() * res.data.length)].toUpperCase());
-            setWord(["alone"][Math.floor(Math.random() * res.data.length)].toUpperCase());
+            setWord(["alone"][Math.floor(Math.random() * ["alone"].length)].toUpperCase());
         })
     }, [])
 
