@@ -42,7 +42,7 @@ test('if guesses word has two Es but word only has one E in the right place only
         .expect(Selector('[data-guessed="E-4"]').getStyleProperty('background-color')).eql(green)
 })
 
-test('if guesses word has two Es but word only has one E in the right place only the right one E is green and the other gray 2', async t => {
+test('if guesses word has two Es but word only has one E not in the right place one E is gray and the other yellow', async t => {
     await inputWord(["E", "A", "G", "E", "R", "{enter}"], t)
     await t.expect(Selector('[data-guessed="E-0"]').getStyleProperty('background-color')).eql(gray)
         .expect(Selector('[data-guessed="E-3"]').getStyleProperty('background-color')).eql(yellow)
